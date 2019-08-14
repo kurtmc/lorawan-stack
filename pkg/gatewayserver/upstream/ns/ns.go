@@ -36,11 +36,12 @@ type Handler struct {
 var errNotFound = errors.DefineNotFound("network_server_not_found", "network server not found for ids `ids`")
 
 // NewHandler returns a new upstream handler.
-func NewHandler(ctx context.Context, name string, c component.Component) *Handler {
+func NewHandler(ctx context.Context, name string, c component.Component, devAddrPrefixes []types.DevAddrPrefix) *Handler {
 	return &Handler{
-		ctx:  ctx,
-		name: name,
-		c:    c,
+		ctx:             ctx,
+		name:            name,
+		c:               c,
+		devAddrPrefixes: devAddrPrefixes,
 	}
 }
 
