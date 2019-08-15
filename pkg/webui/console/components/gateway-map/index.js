@@ -28,7 +28,7 @@ export default class GatewayMap extends React.Component {
               longitude: location.location.longitude || 0,
             },
           }))
-        : false
+        : []
 
     return (
       <MapWidget id="gateway-map-widget" markers={markers} link={`/gateways/${gtwId}/location`} />

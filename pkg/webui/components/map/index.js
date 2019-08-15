@@ -88,6 +88,6 @@ export default class Map extends React.Component {
 Map.propTypes = {
   id: PropTypes.string.isRequired,
   widget: PropTypes.bool,
-  markers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  markers: PropTypes.array,
   leafletConfig: PropTypes.object,
 }

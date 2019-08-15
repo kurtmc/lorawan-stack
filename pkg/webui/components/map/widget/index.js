@@ -30,7 +30,7 @@ export default class MapWidget extends React.Component {
       zoomControl: false,
     }
 
-    return markers ? (
+    return markers.length > 0 ? (
       <Map id={id} markers={markers} leafletConfig={leafletConfig} widget />
     ) : (
       <div className={style.mapDisabled}>
@@ -62,6 +62,6 @@ export default class MapWidget extends React.Component {
 
 MapWidget.propTypes = {
   id: PropTypes.string.isRequired,
-  markers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  markers: PropTypes.array,
   link: PropTypes.string,
 }

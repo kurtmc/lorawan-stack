@@ -35,7 +35,7 @@ export default class DeviceMap extends React.Component {
               },
             },
           ]
-        : false
+        : []
 
     return (
       <MapWidget
