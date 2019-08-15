@@ -36,7 +36,7 @@ export default class DeviceMap extends React.Component {
       <MapWidget
         id="device-map-widget"
         markers={markers}
-        link={`/applications/${ids.app}/devices/${ids.device}/location`}
+        path={`/applications/${ids.app}/devices/${ids.device}/location`}
       />
     )
   }

@@ -40,13 +40,13 @@ export default class MapWidget extends React.Component {
   }
 
   render() {
-    const { link } = this.props
+    const { path } = this.props
 
     return (
       <aside className={style.wrapper}>
         <div className={style.header}>
           <Message className={style.titleMessage} content={sharedMessages.location} />
-          <Link to={link}>
+          <Link to={path}>
             <Message
               className={style.changeLocationMessage}
               content={sharedMessages.changeLocation}
@@ -63,5 +63,5 @@ export default class MapWidget extends React.Component {
 MapWidget.propTypes = {
   id: PropTypes.string.isRequired,
   markers: PropTypes.array,
-  link: PropTypes.string,
+  path: PropTypes.string,
 }
