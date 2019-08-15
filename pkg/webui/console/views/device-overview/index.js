@@ -17,6 +17,7 @@ import { connect } from 'react-redux'
 import { Col, Row, Container } from 'react-grid-system'
 import { defineMessages } from 'react-intl'
 import bind from 'autobind-decorator'
+import { getApplicationId, getDeviceId } from '../../../lib/selectors/id'
 
 import sharedMessages from '../../../lib/shared-messages'
 
@@ -177,6 +178,7 @@ class DeviceOverview extends React.Component {
   render() {
     const { device } = this.props
     const devIds = device && device.ids
+    const ids = { device: getDeviceId(devIds), app: getApplicationId(devIds) }
 
     return (
       <Container>
@@ -187,7 +189,7 @@ class DeviceOverview extends React.Component {
           </Col>
           <Col md={12} lg={6} className={style.latestEvents}>
             <DeviceEvents devIds={devIds} widget />
-            <DeviceMap device={device} />
+            <DeviceMap device={device} ids={ids} />
           </Col>
         </Row>
       </Container>

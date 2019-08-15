@@ -14,16 +14,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { getApplicationId, getDeviceId } from '../../../lib/selectors/id'
 import MapWidget from '../../../components/map/widget/'
 
 export default class DeviceMap extends React.Component {
   render() {
-    const { device } = this.props
-
-    const devIds = device && device.ids
-    const devId = getDeviceId(devIds)
-    const appId = getApplicationId(devIds)
+    const { device, ids } = this.props
 
     const markers =
       device.locations && device.locations.user
@@ -41,12 +36,16 @@ export default class DeviceMap extends React.Component {
       <MapWidget
         id="device-map-widget"
         markers={markers}
-        link={`/applications/${appId}/devices/${devId}/location`}
+        link={`/applications/${ids.app}/devices/${ids.device}/location`}
       />
     )
   }
 }
 
 DeviceMap.propTypes = {
+  ids: PropTypes.shape({
+    app: PropTypes.string.isRequired,
+    device: PropTypes.string.isRequired,
+  }),
   device: PropTypes.object.isRequired,
 }
