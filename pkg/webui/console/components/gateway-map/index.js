@@ -38,5 +38,5 @@ export default class GatewayMap extends React.Component {
 
 GatewayMap.propTypes = {
   gtwId: PropTypes.string.isRequired,
-  gateway: PropTypes.object,
+  gateway: PropTypes.object.isRequired,
 }
