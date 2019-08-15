@@ -26,42 +26,37 @@ delete Leaflet.Icon.Default.prototype._getIconUrl
 Leaflet.Icon.Default.mergeOptions({
   iconRetinaUrl: MarkerIcon,
   iconUrl: MarkerIcon,
-  iconSize: [ 26, 36 ],
-  shadowSize: [ 26, 36 ],
-  iconAnchor: [ 13, 36 ],
-  shadowAnchor: [ 8, 37 ],
-  popupAnchor: [ 0, -40 ],
+  iconSize: [26, 36],
+  shadowSize: [26, 36],
+  iconAnchor: [13, 36],
+  shadowAnchor: [8, 37],
+  popupAnchor: [0, -40],
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 })
 
 export default class Map extends React.Component {
-
-  getMapCenter (markers) {
+  getMapCenter(markers) {
     // This will calculate zoom and map center long/lang based on all markers provided.
     // Currently it just returns the first marker.
     return markers[0]
   }
 
-  createMap (config, id) {
-    this.map = Leaflet.map( id, {
+  createMap(config, id) {
+    this.map = Leaflet.map(id, {
       ...config,
     })
   }
 
-  createMarkers (markers) {
+  createMarkers(markers) {
     markers.map(marker =>
-      Leaflet.marker([ marker.position.latitude, marker.position.longitude ])
-        .addTo(this.map)
+      Leaflet.marker([marker.position.latitude, marker.position.longitude]).addTo(this.map),
     )
   }
 
-  componentDidMount () {
-    const {
-      id,
-      markers,
-    } = this.props
+  componentDidMount() {
+    const { id, markers } = this.props
 
-    const { position } = ( markers.length >= 1 ) ? this.getMapCenter(markers) : markers[0]
+    const { position } = markers.length >= 1 ? this.getMapCenter(markers) : markers[0]
 
     const config = {
       layers: [
@@ -69,7 +64,7 @@ export default class Map extends React.Component {
           attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
         }),
       ],
-      center: [ position.latitude, position.longitude ],
+      center: [position.latitude, position.longitude],
       zoom: 11,
       minZoom: 1,
       ...this.props.leafletConfig,
@@ -77,22 +72,14 @@ export default class Map extends React.Component {
 
     this.createMap(config, id)
     this.createMarkers(markers, id)
-
   }
 
-  render () {
-    const {
-      id,
-      widget,
-    } = this.props
+  render() {
+    const { id, widget } = this.props
 
     return (
       <div className={style.container}>
-        <div className={classnames(
-          style.map,
-          { [style.widget]: widget },
-        )} id={id}
-        />
+        <div className={classnames(style.map, { [style.widget]: widget })} id={id} />
       </div>
     )
   }
@@ -101,9 +88,6 @@ export default class Map extends React.Component {
 Map.propTypes = {
   id: PropTypes.string.isRequired,
   widget: PropTypes.bool,
-  markers: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
+  markers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   leafletConfig: PropTypes.object,
 }

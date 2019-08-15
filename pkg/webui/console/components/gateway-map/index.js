@@ -17,31 +17,22 @@ import PropTypes from 'prop-types'
 import MapWidget from '../../../components/map/widget/'
 
 export default class GatewayMap extends React.Component {
+  render() {
+    const { gtwId, gateway } = this.props
 
-  render () {
-    const {
-      gtwId,
-      gateway,
-    } = this.props
-
-    const markers = gateway.antennas && gateway.antennas[0].location
-      ? gateway.antennas.map(location =>
-        ({
-          position: {
-            latitude: ( location.location.latitude || 0),
-            longitude: ( location.location.longitude || 0),
-          },
-        }),
-      ) : false
+    const markers =
+      gateway.antennas && gateway.antennas[0].location
+        ? gateway.antennas.map(location => ({
+            position: {
+              latitude: location.location.latitude || 0,
+              longitude: location.location.longitude || 0,
+            },
+          }))
+        : false
 
     return (
-      <MapWidget
-        id="gateway-map-widget"
-        markers={markers}
-        link={`/gateways/${gtwId}/location`}
-      />
+      <MapWidget id="gateway-map-widget" markers={markers} link={`/gateways/${gtwId}/location`} />
     )
-
   }
 }
 

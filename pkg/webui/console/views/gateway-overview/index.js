@@ -110,8 +110,7 @@ export default class GatewayOverview extends React.Component {
     )
   }
 
-
-  render () {
+  render() {
     const { gtwId, gateway } = this.props
 
     return (
@@ -125,10 +124,7 @@ export default class GatewayOverview extends React.Component {
             <div className={style.latestEvents}>
               <GatewayEvents gtwId={gtwId} widget />
             </div>
-            <GatewayMap
-              gtwId={gtwId}
-              gateway={gateway}
-            />
+            <GatewayMap gtwId={gtwId} gateway={gateway} />
           </Col>
         </Row>
       </Container>

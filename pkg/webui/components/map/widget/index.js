@@ -23,45 +23,29 @@ import Map from '../../map'
 import style from './widget.styl'
 
 export default class MapWidget extends React.Component {
-
-  get Map () {
-    const {
-      id,
-      markers,
-    } = this.props
+  get Map() {
+    const { id, markers } = this.props
 
     const leafletConfig = {
       zoomControl: false,
     }
 
-    return (
-      markers ? (
-        <Map
-          id={id}
-          markers={markers}
-          leafletConfig={leafletConfig}
-          widget
-        />
-      ) : (
-        <div className={style.mapDisabled}>
-          <Message component="span" content={sharedMessages.noLocation} />
-        </div>
-      )
+    return markers ? (
+      <Map id={id} markers={markers} leafletConfig={leafletConfig} widget />
+    ) : (
+      <div className={style.mapDisabled}>
+        <Message component="span" content={sharedMessages.noLocation} />
+      </div>
     )
   }
 
-  render () {
-    const {
-      link,
-    } = this.props
+  render() {
+    const { link } = this.props
 
     return (
       <aside className={style.wrapper}>
         <div className={style.header}>
-          <Message
-            className={style.titleMessage}
-            content={sharedMessages.location}
-          />
+          <Message className={style.titleMessage} content={sharedMessages.location} />
           <Link to={link}>
             <Message
               className={style.changeLocationMessage}
@@ -78,9 +62,6 @@ export default class MapWidget extends React.Component {
 
 MapWidget.propTypes = {
   id: PropTypes.string.isRequired,
-  markers: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
+  markers: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   link: PropTypes.string,
 }

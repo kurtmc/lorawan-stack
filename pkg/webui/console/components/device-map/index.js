@@ -18,23 +18,24 @@ import { getApplicationId, getDeviceId } from '../../../lib/selectors/id'
 import MapWidget from '../../../components/map/widget/'
 
 export default class DeviceMap extends React.Component {
-
-  render () {
+  render() {
     const { device } = this.props
 
     const devIds = device && device.ids
     const devId = getDeviceId(devIds)
     const appId = getApplicationId(devIds)
 
-    const markers = device.locations && device.locations.user
-      ? [
-        {
-          position: {
-            latitude: ( device.locations.user.latitude || 0),
-            longitude: ( device.locations.user.longitude || 0),
-          },
-        },
-      ] : false
+    const markers =
+      device.locations && device.locations.user
+        ? [
+            {
+              position: {
+                latitude: device.locations.user.latitude || 0,
+                longitude: device.locations.user.longitude || 0,
+              },
+            },
+          ]
+        : false
 
     return (
       <MapWidget
