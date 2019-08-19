@@ -29,14 +29,14 @@ import (
 type Handler struct {
 	ctx             context.Context
 	name            string
-	c               component.Component
+	c               *component.Component
 	devAddrPrefixes []types.DevAddrPrefix
 }
 
 var errNotFound = errors.DefineNotFound("network_server_not_found", "network server not found for ids `ids`")
 
 // NewHandler returns a new upstream handler.
-func NewHandler(ctx context.Context, name string, c component.Component, devAddrPrefixes []types.DevAddrPrefix) *Handler {
+func NewHandler(ctx context.Context, name string, c *component.Component, devAddrPrefixes []types.DevAddrPrefix) *Handler {
 	return &Handler{
 		ctx:             ctx,
 		name:            name,
@@ -57,20 +57,21 @@ func (h *Handler) GetDevAddrPrefixes() []types.DevAddrPrefix {
 
 // Setup implements upstream.Handler.
 func (h *Handler) Setup() error {
-	// Not necessary for this upstream.
 	return nil
 }
 
 // ConnectGateway implements upstream.Handler.
-func (h *Handler) ConnectGateway(ctx context.Context, gtwConn *io.Connection) error {
-	// Not necessary for this upstream.
-	return nil
-}
-
-// DisconnectGateway implements upstream.Handler
-func (h *Handler) DisconnectGateway(ctx context.Context, gatewayUID string) error {
-	// Not necessary for this upstream.
-	return nil
+func (h *Handler) ConnectGateway(ctx context.Context, _ string, gtwConn *io.Connection) error {
+	h.c.ClaimIDs(ctx, gtwConn.Gateway().GatewayIdentifiers)
+	for {
+		select {
+		case <-ctx.Done():
+			h.c.UnclaimIDs(ctx, gtwConn.Gateway().GatewayIdentifiers)
+			return ctx.Err()
+		default:
+			return nil
+		}
+	}
 }
 
 // HandleUp implements upstream.Handler.
