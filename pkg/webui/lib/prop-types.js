@@ -61,4 +61,36 @@ PropTypes.event = PropTypes.shape({
   data: PropTypes.object,
 })
 
+PropTypes.env = PropTypes.shape({
+  appRoot: PropTypes.string,
+  assetsRoot: PropTypes.string,
+  siteName: PropTypes.string,
+  siteTitle: PropTypes.string,
+  siteSubTitle: PropTypes.string,
+  pageData: PropTypes.shape({}),
+  config: PropTypes.shape({
+    language: PropTypes.string,
+    is: PropTypes.shape({
+      enabled: PropTypes.bool,
+      base_url: PropTypes.string,
+    }),
+    as: PropTypes.shape({
+      enabled: PropTypes.bool,
+      base_url: PropTypes.string,
+    }),
+    ns: PropTypes.shape({
+      enabled: PropTypes.bool,
+      base_url: PropTypes.string,
+    }),
+    js: PropTypes.shape({
+      enabled: PropTypes.bool,
+      base_url: PropTypes.string,
+    }),
+    gs: PropTypes.shape({
+      enabled: PropTypes.bool,
+      base_url: PropTypes.string,
+    }),
+  }),
+})
+
 export default PropTypes
