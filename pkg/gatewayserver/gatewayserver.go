@@ -65,7 +65,7 @@ type GatewayServer struct {
 	connections sync.Map
 }
 
-var errESUnavailable = errors.DefineUnavailable("entity_registry_unavailable", "Entity Registry unavailable for gateway_id `{gateway_id}`")
+var errERPeerUnavailable = errors.DefineUnavailable("entity_registry_unavailable", "Entity Registry unavailable for gateway `{gateway_uid}`")
 
 func (gs *GatewayServer) getRegistry(ctx context.Context, ids *ttnpb.GatewayIdentifiers) (ttnpb.GatewayRegistryClient, error) {
 	if gs.registry != nil {
@@ -74,7 +74,10 @@ func (gs *GatewayServer) getRegistry(ctx context.Context, ids *ttnpb.GatewayIden
 	if peer := gs.GetPeer(ctx, ttnpb.ClusterRole_ENTITY_REGISTRY, ids); peer != nil {
 		return ttnpb.NewGatewayRegistryClient(peer.Conn()), nil
 	}
-	return nil, errESUnavailable.WithAttributes("gateway_id", ids.GetGatewayID())
+	if ids != nil {
+		return nil, errERPeerUnavailable.WithAttributes("gateway_uid", unique.ID(ctx, ids))
+	}
+	return nil, errERPeerUnavailable
 }
 
 // Option configures GatewayServer.
