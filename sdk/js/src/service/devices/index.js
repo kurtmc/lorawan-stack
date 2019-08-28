@@ -270,7 +270,7 @@ class Devices {
     return this._responseTransform(response)
   }
 
-  async create(applicationId, device, { abp = false, withRootKeys = false } = {}) {
+  async create(applicationId, device, { abp = false } = {}) {
     const dev = device
 
     if (abp) {
