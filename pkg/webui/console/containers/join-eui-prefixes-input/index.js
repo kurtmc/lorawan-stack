@@ -36,7 +36,7 @@ const JoinEUIPrefixesField = function({
   error,
   fetching,
   getPrefixes,
-  select,
+  showPrefixes,
 }) {
   useEffect(() => {
     getPrefixes()
@@ -54,7 +54,7 @@ const JoinEUIPrefixesField = function({
       fetching={fetching}
       warning={Boolean(error) ? m.prefixesFetchingFailure : undefined}
       prefixes={prefixes}
-      select={select}
+      showPrefixes={showPrefixes}
     />
   )
 }
@@ -74,7 +74,7 @@ JoinEUIPrefixesField.propTypes = {
     }),
   ),
   required: PropTypes.bool,
-  select: PropTypes.bool,
+  showPrefixes: PropTypes.bool,
   title: PropTypes.message.isRequired,
 }
 
@@ -84,8 +84,8 @@ JoinEUIPrefixesField.defaultProps = {
   autoFocus: false,
   disabled: false,
   prefixes: [],
-  select: true,
   error: undefined,
+  showPrefixes: true,
 }
 
 export default connect(JoinEUIPrefixesField)
