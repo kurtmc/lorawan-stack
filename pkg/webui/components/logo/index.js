@@ -15,6 +15,8 @@
 import React from 'react'
 import classnames from 'classnames'
 
+import PropTypes from '../../lib/prop-types'
+
 import TtsLogo from '../../assets/logos/tts-os.svg'
 import style from './logo.styl'
 
@@ -28,6 +30,14 @@ const Logo = function(props) {
       <img alt="The Things Stack Logo" src={TtsLogo} />
     </div>
   )
+}
+
+Logo.propTypes = {
+  className: PropTypes.string,
+}
+
+Logo.defaultProps = {
+  className: undefined,
 }
 
 export default Logo
