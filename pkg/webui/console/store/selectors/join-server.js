@@ -12,25 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {
-  GET_JOIN_EUI_PREFIXES_BASE,
-} from '../actions/join-server'
+import { GET_JOIN_EUI_PREFIXES_BASE } from '../actions/join-server'
 
 import { createFetchingSelector } from './fetching'
 import { createErrorSelector } from './error'
 
 const selectJsStore = state => state.js
 
-export const selectJoinEUIPrefixes = function (state) {
+export const selectJoinEUIPrefixes = function(state) {
   const store = selectJsStore(state)
 
   return store.prefixes
 }
 
-export const selectJoinEUIPrefixesError = createErrorSelector([
-  GET_JOIN_EUI_PREFIXES_BASE,
-])
+export const selectJoinEUIPrefixesError = createErrorSelector([GET_JOIN_EUI_PREFIXES_BASE])
 
-export const selectJoinEUIPrefixesFetching = createFetchingSelector([
-  GET_JOIN_EUI_PREFIXES_BASE,
-])
+export const selectJoinEUIPrefixesFetching = createFetchingSelector([GET_JOIN_EUI_PREFIXES_BASE])

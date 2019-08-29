@@ -20,9 +20,12 @@ const defaultState = {
   prefixes: [],
 }
 
-export default handleActions({
-  [GET_JOIN_EUI_PREFIXES_SUCCESS]: (state, { payload }) => ({
-    ...state,
-    prefixes: payload,
-  }),
-}, defaultState)
+export default handleActions(
+  {
+    [GET_JOIN_EUI_PREFIXES_SUCCESS]: (state, { payload }) => ({
+      ...state,
+      prefixes: payload,
+    }),
+  },
+  defaultState,
+)

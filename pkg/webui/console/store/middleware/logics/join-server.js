@@ -19,13 +19,11 @@ import createRequestLogic from './lib'
 
 const getJoinEUIPrefixesLogic = createRequestLogic({
   type: js.GET_JOIN_EUI_PREFIXES,
-  async process () {
+  async process() {
     const { prefixes } = await api.js.joinEUIPrefixes.list()
 
     return prefixes
   },
 })
 
-export default [
-  getJoinEUIPrefixesLogic,
-]
+export default [getJoinEUIPrefixesLogic]
