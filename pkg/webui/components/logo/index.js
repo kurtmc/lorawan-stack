@@ -15,17 +15,19 @@
 import React from 'react'
 import classnames from 'classnames'
 
-import TTN from './ttn'
+import TtsLogo from '../../assets/logos/tts-os.svg'
 import style from './logo.styl'
 
 const Logo = function(props) {
   const { className } = props
 
-  const img = TTN
-
   const classname = classnames(style.logo, className)
 
-  return <div className={classname}>{img}</div>
+  return (
+    <div className={classname}>
+      <img alt="The Things Stack Logo" src={TtsLogo} />
+    </div>
+  )
 }
 
 export default Logo
