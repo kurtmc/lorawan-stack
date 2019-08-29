@@ -356,7 +356,10 @@ func (js *JoinServer) HandleJoin(ctx context.Context, req *ttnpb.JoinRequest) (r
 
 			cc, err := js.GetPeerConn(ctx, ttnpb.ClusterRole_CRYPTO_SERVER, dev.EndDeviceIdentifiers)
 			if err != nil {
-				logger.WithError(err).Debug("Crypto Server connection is not available")
+				if !errors.IsNotFound(err) {
+					logger.WithError(err).Debug("Crypto Server connection is not available")
+				}
+				cc = nil
 			}
 
 			var networkCryptoService cryptoservices.Network

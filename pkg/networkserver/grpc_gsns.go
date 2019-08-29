@@ -924,7 +924,9 @@ func (ns *NetworkServer) newDevAddr(context.Context, *ttnpb.EndDevice) types.Dev
 func (ns *NetworkServer) sendJoinRequest(ctx context.Context, ids ttnpb.EndDeviceIdentifiers, req *ttnpb.JoinRequest) (*ttnpb.JoinResponse, error) {
 	logger := log.FromContext(ctx)
 	cc, err := ns.GetPeerConn(ctx, ttnpb.ClusterRole_JOIN_SERVER, ids)
-	if err == nil {
+	if err != nil && !errors.IsNotFound(err) {
+		return nil, err
+	} else if err == nil {
 		resp, err := ttnpb.NewNsJsClient(cc).HandleJoin(ctx, req, ns.WithClusterAuth())
 		if err == nil {
 			logger.Debug("Join-request accepted by cluster-local Join Server")
